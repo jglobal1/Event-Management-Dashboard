@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import FiltersSection from './FiltersSection';
 import EventPagination from './EventPagnation';
-import Modal from './Modal';
+import Modal from './Modal'; // Ensure Modal is imported correctly
 import SortIcon from '/src/assets/sort-down.png';
 
 // Dummy event data
@@ -120,7 +120,7 @@ const EventHistoryTable = ({ darkMode }) => {
       {/* Mobile Version */}
       <div className="sm:hidden">
         {/* Header Row */}
-        <div className={`flex w-[324px] h-[48px] ${darkMode ? 'bg-gray-700' : 'bg-[#F1F5F9]'} px-4 py-2 gap-[120px]`}>
+        <div className={`flex w-[354px] h-[48px] ${darkMode ? 'bg-gray-700' : 'bg-[#F1F5F9]'} px-4 py-2 gap-[120px]`}>
           <h1 className="font-inter text-[12px] font-semibold leading-[16px] text-left w-[70px]">Event Name</h1>
           <h1 className="font-inter text-[12px] font-semibold leading-[16px] text-left w-[70px]">Status</h1>
         </div>
@@ -129,7 +129,7 @@ const EventHistoryTable = ({ darkMode }) => {
         {currentRows.map((event, index) => (
           <div
             key={index}
-            className={`w-[324px] ${darkMode ? 'bg-gray-700 text-white' : 'bg-white text-gray-900'} mb-2 rounded-lg shadow-sm`}
+            className={`w-[354px] pb-3 ${darkMode ? 'bg-gray-700 text-white' : 'bg-white text-gray-900'} mb-2 rounded-lg shadow-sm`}
           >
             {/* Main Row with Expandable Arrow */}
             <div
@@ -146,20 +146,26 @@ const EventHistoryTable = ({ darkMode }) => {
               </span>
             </div>
 
-            {/* Dropdown Content */}
-            {expandedEvent === event.eventName && (
-              <div className={`flex justify-between mt-2 px-6 py-2 text-[12px] ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                <p className={`w-[40%] h-[20px] leading-[20px] ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                  Date: {event.date}
-                </p>
-                <p className={`w-[40%] h-[20px] leading-[20px]`}>
-                  Speaker: {event.speaker}
-                </p>
-              </div>
-            )}
+                {/* Dropdown Content */}
+      {expandedEvent === event.eventName && (
+        <div className={`flex justify-between mt-2 px-6 py-2 text-[12px] ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+          <p
+            className={`w-[40%] h-[20px] leading-[20px] ${darkMode ? 'text-gray-300' : 'text-gray-600'} cursor-pointer`}
+            onClick={() => openModal(event)} // Open modal on date click
+          >
+            {event.date}
+          </p>
+          <p
+            className={`w-[40%] h-[20px] leading-[20px] cursor-pointer`}
+            onClick={() => openModal(event)} // Open modal on speaker click
+          >
+            {event.speaker}
+          </p>
+        </div>
+      )}
+
           </div>
         ))}
-
       </div>
 
       {/* Pagination */}
@@ -170,14 +176,16 @@ const EventHistoryTable = ({ darkMode }) => {
         darkMode={darkMode}
       />
 
-      {/* Modal */}
+      
       {isModalOpen && selectedEvent && (
         <Modal
+          show={isModalOpen} // Ensure this is passed correctly
+          onClose={() => setIsModalOpen(false)}
           event={selectedEvent}
-          closeModal={() => setIsModalOpen(false)}
           darkMode={darkMode}
         />
       )}
+
     </div>
   );
 };

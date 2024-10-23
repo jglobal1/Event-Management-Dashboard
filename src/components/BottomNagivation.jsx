@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import EventPagination from './EventPagnation';
 import { FiUser, FiCalendar, FiSpeaker, FiFileText } from 'react-icons/fi'; // Importing necessary icons
+import speaker from '/src/assets/speaker.png'
+import home from '/src/assets/home.png'
 
 const BottomNavigation = ({ darkMode }) => {
     const [active, setActive] = useState('Home');
 
     const navItems = [
-        { name: 'Home', icon: 'src/assets/home.png' },
+        { name: 'Home', icon:home},
         { name: 'Events', icon: <FiCalendar className={`w-6 h-6 ${darkMode ? 'text-white' : 'text-gray-500'}`} /> }, // Events icon
-        { name: 'Speakers', icon: <FiSpeaker className={`w-6 h-6 ${darkMode ? 'text-white' : 'text-gray-500'}`} /> }, // Speakers icon
+        { name: 'Speakers', icon: speaker}, // Speakers icon
         { name: 'Reports', icon: <FiFileText className={`w-6 h-6 ${darkMode ? 'text-white' : 'text-gray-500'}`} /> }, // Reports icon
         { name: 'Profile', icon: <FiUser className={`w-6 h-6 ${darkMode ? 'text-white' : 'text-gray-500'}`} /> }, // Profile icon
     ];

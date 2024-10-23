@@ -2,26 +2,26 @@ import React from 'react';
 import { FiX } from 'react-icons/fi'; // Importing the close icon
 import avatar from '/src/assets/AvatarGroup.png'; // Placeholder avatar
 
-const Modal = ({ show, onClose, event, onEdit, onDelete, onMarkComplete }) => {
+const Modal = ({ show, onClose, event, onEdit, onDelete, onMarkComplete, darkMode }) => {
   // Return null if the modal is not shown or no event is selected
   if (!show || !event) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-white p-6 ml-[-50px] max-w-lg w-[335px] sm:w-[440px] h-auto sm:h-[380px] rounded-[2px_0_0_0] relative">
+    <div className={`fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50`}>
+      <div className={`p-6 ml-[-50px] max-w-lg w-[335px] sm:w-[440px] h-auto sm:h-[380px] rounded-[2px_0_0_0] relative ${darkMode ? 'bg-gray-800 text-gray-300' : 'bg-white text-gray-800'}`}>
         {/* Header Section */}
         <div className="flex justify-between items-center mb-4">
           {/* Event Name */}
-          <h2 className="font-inter text-[18px] font-semibold leading-[28px] text-left w-full sm:w-[352px] h-[28px]">
+          <h2 className={`font-inter text-[18px] font-semibold leading-[28px] text-left w-full sm:w-[352px] h-[28px] ${darkMode ? 'text-gray-100' : 'text-gray-800'}`}>
             {event.eventName}
           </h2>
           
           {/* Close Button */}
           <button
             onClick={onClose}
-            className="flex items-center justify-center w-8 h-8 rounded-full bg-white border border-gray-300 hover:bg-gray-200 transition-colors"
+            className={`flex items-center justify-center w-8 h-8 rounded-full border ${darkMode ? 'border-gray-700 hover:bg-gray-700' : 'border-gray-300 hover:bg-gray-200'} transition-colors`}
           >
-            <FiX className="w-4 h-4 text-gray-600" />
+            <FiX className={`w-4 h-4 ${darkMode ? 'text-gray-200' : 'text-gray-600'}`} />
           </button>
         </div>
 
@@ -31,7 +31,7 @@ const Modal = ({ show, onClose, event, onEdit, onDelete, onMarkComplete }) => {
         </p>
 
         {/* Event Description */}
-        <p className="mb-4 mt-6 font-inter text-[14px] font-normal leading-[20px] text-left text-[#334155]">
+        <p className="mb-4 mt-6 font-inter text-[14px] font-normal leading-[20px] text-left">
           Event Description
         </p>
 
@@ -62,7 +62,7 @@ const Modal = ({ show, onClose, event, onEdit, onDelete, onMarkComplete }) => {
         </div>
 
         {/* Number of Attendees */}
-        <p className="mb-[55px] font-inter text-[14px] font-normal leading-[20px] text-left text-[#334155]">
+        <p className="mb-[55px] font-inter text-[14px] font-normal leading-[20px] text-left">
           {event.attendees} 3 Guest Speakers: Speaker name A, Speaker name B, Speaker name C.
           <br /> 300 Attendees
         </p>
@@ -72,7 +72,7 @@ const Modal = ({ show, onClose, event, onEdit, onDelete, onMarkComplete }) => {
           {/* Edit Button */}
           <button
             onClick={onEdit}
-            className="w-[287px] text-center sm:w-[58px] h-[36px] gap-2 sm:mr-16 font-inter text-[14px] font-normal leading-[20px] bg-white border border-gray-200 rounded hover:bg-gray-100"
+            className={`w-[287px] text-center sm:w-[58px] h-[36px] gap-2 sm:mr-16 font-inter text-[14px] font-normal leading-[20px] ${darkMode ? 'bg-gray-700 text-white border-gray-600 hover:bg-gray-600' : 'bg-white border border-gray-200 hover:bg-gray-100'}`}
           >
             Edit
           </button>
@@ -80,7 +80,7 @@ const Modal = ({ show, onClose, event, onEdit, onDelete, onMarkComplete }) => {
           {/* Delete Button */}
           <button
             onClick={onDelete}
-            className="w-[287px] text-center sm:w-[75px] h-[36px] text-[14px] py-2 px-4 gap-2 bg-red-500 text-white rounded hover:bg-red-600"
+            className={`w-[287px] text-center sm:w-[75px] h-[36px] text-[14px] py-2 px-4 gap-2 bg-red-500 text-white rounded hover:bg-red-600`}
           >
             Delete
           </button>
@@ -88,7 +88,7 @@ const Modal = ({ show, onClose, event, onEdit, onDelete, onMarkComplete }) => {
           {/* Mark as Completed Button */}
           <button
             onClick={onMarkComplete}
-            className="w-[287px] text-center sm:w-auto px-4 py-2 font-inter text-[14px] font-normal leading-[20px] bg-green-500 text-white rounded hover:bg-green-600"
+            className={`w-[287px] text-center sm:w-auto px-4 py-2 font-inter text-[14px] font-normal leading-[20px] bg-green-500 text-white rounded hover:bg-green-600`}
           >
             Mark as Completed
           </button>
